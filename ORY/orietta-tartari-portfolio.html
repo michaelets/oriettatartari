@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orietta Tartari - Pittrice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-black: #1a1a1a;
+            --secondary-black: #2d2d2d;
+            --primary-purple: #8b5cf6;
+            --secondary-purple: #a78bfa;
+            --light-purple: #c4b5fd;
+            --text-light: #e5e5e5;
+            --text-gray: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-black);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(139, 92, 246, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, #3d2a5c 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--light-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-purple);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-purple);
+            margin: 1rem auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .artist-photo {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .artist-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+
+        .bio-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Featured Works Section */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .artwork-card {
+            background: var(--secondary-black);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .artwork-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .artwork-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .artwork-info {
+            padding: 1.5rem;
+        }
+
+        .artwork-info h3 {
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .artwork-info p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Gallery Section */
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--secondary-black);
+            color: var(--text-light);
+            border: 2px solid var(--primary-purple);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Activities Section */
+        .activities-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: var(--secondary-black);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-purple);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .year {
+            color: var(--secondary-purple);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-gray);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--secondary-black);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: var(--primary-purple);
+            transform: translateX(5px);
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary-black);
+            border-radius: 50%;
+            color: var(--primary-purple);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-info {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .lightbox-info h3 {
+            color: var(--primary-purple);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-info p {
+            color: var(--text-gray);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-purple);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(139, 92, 246, 0.8);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary-purple);
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-black);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(26, 26, 26, 0.98);
+                width: 100%;
+                padding: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .artist-photo {
+                margin: 0 auto;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-nav {
+                padding: 0.5rem;
+                font-size: 1.5rem;
+            }
+
+            .lightbox-prev {
+                left: 0.5rem;
+            }
+
+            .lightbox-next {
+                right: 0.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Orietta Tartari</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">Bio</a></li>
+                <li><a href="#featured" onclick="closeMenu()">Opere</a></li>
+                <li><a href="#gallery" onclick="closeMenu()">Galleria</a></li>
+                <li><a href="#activities" onclick="closeMenu()">Attività</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1>Orietta Tartari</h1>
+            <p>Pittrice Contemporanea</p>
+            <a href="#gallery" class="cta-button">Scopri le Opere</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Biografia</h2>
+        <div class="about-content fade-in">
+            <img src="image.jpg" alt="Orietta Tartari" class="artist-photo">
+            <div class="bio-text">
+                <p>Orietta Tartari è una pittrice contemporanea che ha dedicato la sua vita all'esplorazione delle emozioni umane attraverso l'arte. La sua ricerca artistica si concentra sulla rappresentazione dell'anima e dell'essenza interiore, utilizzando una palette cromatica che spazia dai toni intensi e drammatici alle sfumature più delicate.</p>
+
+                <p>Le sue opere sono caratterizzate da una forte componente emotiva, dove ogni pennellata racconta una storia di profondità e introspezione. Orietta lavora principalmente con tecniche pittoriche tradizionali, spaziando dai ritratti evocativi ai paesaggi naturalistici, sempre mantenendo una connessione autentica con il suo pubblico.</p>
+
+                <p>Il suo percorso artistico è segnato da una continua evoluzione stilistica, che riflette la sua crescita personale e la sua sensibilità verso il mondo che la circonda. Attraverso le sue opere, Orietta invita lo spettatore a un viaggio introspettivo, dove l'arte diventa un ponte tra il visibile e l'invisibile, tra la realtà esterna e il mondo interiore.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Works Section -->
+    <section id="featured">
+        <h2 class="section-title">Opere in Evidenza</h2>
+        <div class="featured-grid" id="featuredWorks">
+            <!-- Featured works will be loaded here dynamically -->
+        </div>
+    </section>
+
+    <!-- Full Gallery Section -->
+    <section id="gallery">
+        <h2 class="section-title">Galleria Completa</h2>
+        <div class="gallery-filters">
+            <button class="filter-btn active" onclick="filterGallery('all')">Tutte</button>
+            <button class="filter-btn" onclick="filterGallery('2024')">2024</button>
+            <button class="filter-btn" onclick="filterGallery('2023')">2023</button>
+            <button class="filter-btn" onclick="filterGallery('2022')">2022</button>
+            <button class="filter-btn" onclick="filterGallery('2021')">2021</button>
+            <button class="filter-btn" onclick="filterGallery('precedenti')">Precedenti</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be loaded here dynamically -->
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities">
+        <h2 class="section-title">Attività ed Eventi</h2>
+        <div class="activities-timeline">
+            <div class="timeline-item fade-in">
+                <div class="year">2024 - Presente</div>
+                <h3>Esposizioni Collettive</h3>
+                <p>Partecipazione a diverse mostre collettive presso gallerie d'arte contemporanea, con focus su tematiche legate all'introspezione e all'identità.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="year">2023</div>
+                <h3>Mostra Personale "Sguardi Interiori"</h3>
+                <p>Prima mostra personale dedicata alla serie di ritratti che esplorano l'anima attraverso lo sguardo, presentata presso gallerie locali.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="year">2022</div>
+                <h3>Workshop e Laboratori</h3>
+                <p>Conduzione di workshop artistici per aspiranti pittori, con focus sulle tecniche di ritrattistica e uso del colore.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="year">2020 - 2021</div>
+                <h3>Serie "Natura e Riflessioni"</h3>
+                <p>Realizzazione di una serie di opere dedicate ai paesaggi naturali e alla loro connessione con il mondo interiore.</p>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="year">Attività Correnti</div>
+                <h3>Commissioni Private e Progetti Artistici</h3>
+                <p>Disponibile per commissioni private, ritratti personalizzati e progetti artistici su misura. Contatti aperti per collaborazioni con gallerie e spazi espositivi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contatti</h2>
+        <div class="contact-content fade-in">
+            <p style="margin-bottom: 2rem; color: var(--text-gray);">Per informazioni, commissioni o collaborazioni, non esitare a contattarmi</p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:info@oriettatartari.com">info@oriettatartari.com</a>
+                </div>
+
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+393401234567">+39 340 123 4567</a>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://instagram.com/oriettatartari" target="_blank" title="Instagram">📷</a>
+                <a href="https://facebook.com/oriettatartari" target="_blank" title="Facebook">👤</a>
+                <a href="https://twitter.com/oriettatartari" target="_blank" title="Twitter">🐦</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Orietta Tartari. Tutti i diritti riservati.</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle"></h3>
+                <p id="lightboxDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample artwork data - Replace with your actual artworks
+        const artworks = [
+            // 2024
+            { id: 1, title: "Sguardo Velato", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", image: "placeholder-painting1.jpg" },
+            { id: 2, title: "Fiume in Movimento", description: "Paesaggio naturale con tecnica a spatola", year: "2024", image: "placeholder-painting2.jpg" },
+            { id: 3, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", image: "placeholder-painting3.jpg" },
+            { id: 4, title: "Essenza Femminile", description: "Ritratto astratto con accenni viola", year: "2024", image: "placeholder-painting4.jpg" },
+
+            // 2023
+            { id: 5, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", image: "placeholder-painting5.jpg" },
+            { id: 6, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", image: "placeholder-painting6.jpg" },
+            { id: 7, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", image: "placeholder-painting7.jpg" },
+            { id: 8, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", image: "placeholder-painting8.jpg" },
+
+            // 2022
+            { id: 9, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", image: "placeholder-painting9.jpg" },
+            { id: 10, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", image: "placeholder-painting10.jpg" },
+            { id: 11, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", image: "placeholder-painting11.jpg" },
+            { id: 12, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", image: "placeholder-painting12.jpg" },
+
+            // Add more artworks as needed...
+        ];
+
+        let currentLightboxIndex = 0;
+        let currentFilter = 'all';
+
+        // Load featured works (random selection)
+        function loadFeaturedWorks() {
+            const featured = document.getElementById('featuredWorks');
+            const shuffled = [...artworks].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 6);
+
+            featured.innerHTML = selected.map(art => `
+                <div class="artwork-card fade-in" onclick="openLightbox(${art.id})">
+                    <img src="${art.image}" alt="${art.title}" class="artwork-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'350\'%3E%3Crect fill=\'%232d2d2d\' width=\'400\' height=\'350\'/%3E%3Ctext fill=\'%238b5cf6\' font-size=\'20\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
+                    <div class="artwork-info">
+                        <h3>${art.title}</h3>
+                        <p>${art.description}</p>
+                        <p style="color: var(--primary-purple); margin-top: 0.5rem;">${art.year}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load gallery with filter
+        function loadGallery(filter = 'all') {
+            const gallery = document.getElementById('galleryGrid');
+            let filtered = artworks;
+
+            if (filter !== 'all') {
+                if (filter === 'precedenti') {
+                    filtered = artworks.filter(art => parseInt(art.year) < 2021);
+                } else {
+                    filtered = artworks.filter(art => art.year === filter);
+                }
+            }
+
+            gallery.innerHTML = filtered.map(art => `
+                <div class="artwork-card fade-in" onclick="openLightbox(${art.id})">
+                    <img src="${art.image}" alt="${art.title}" class="artwork-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'350\'%3E%3Crect fill=\'%232d2d2d\' width=\'400\' height=\'350\'/%3E%3Ctext fill=\'%238b5cf6\' font-size=\'20\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
+                    <div class="artwork-info">
+                        <h3>${art.title}</h3>
+                        <p>${art.description}</p>
+                        <p style="color: var(--primary-purple); margin-top: 0.5rem;">${art.year}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter gallery
+        function filterGallery(year) {
+            currentFilter = year;
+            loadGallery(year);
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Lightbox functions
+        function openLightbox(artworkId) {
+            const artwork = artworks.find(art => art.id === artworkId);
+            if (!artwork) return;
+
+            currentLightboxIndex = artworks.findIndex(art => art.id === artworkId);
+
+            document.getElementById('lightboxImage').src = artwork.image;
+            document.getElementById('lightboxTitle').textContent = artwork.title;
+            document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (!event || event.target.id === 'lightbox') {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = artworks.length - 1;
+            if (currentLightboxIndex >= artworks.length) currentLightboxIndex = 0;
+
+            const artwork = artworks[currentLightboxIndex];
+            document.getElementById('lightboxImage').src = artwork.image;
+            document.getElementById('lightboxTitle').textContent = artwork.title;
+            document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+                if (e.key === 'Escape') closeLightbox({ target: { id: 'lightbox' }});
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFeaturedWorks();
+            loadGallery();
+
+            // Observe elements for animation
+            document.querySelectorAll('.timeline-item, .artwork-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
