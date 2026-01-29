@@ -584,7 +584,7 @@
     <section id="about">
         <h2 class="section-title">Biografia</h2>
         <div class="about-content fade-in">
-            <img src="image.jpg" alt="Orietta Tartari" class="artist-photo">
+            <img src="image.png" alt="Orietta Tartari" class="artist-photo">
             <div class="bio-text">
                 <p>Orietta Tartari è una pittrice contemporanea che ha dedicato la sua vita all'esplorazione delle emozioni umane attraverso l'arte. La sua ricerca artistica si concentra sulla rappresentazione dell'anima e dell'essenza interiore, utilizzando una palette cromatica che spazia dai toni intensi e drammatici alle sfumature più delicate.</p>
 
@@ -608,11 +608,10 @@
         <h2 class="section-title">Galleria Completa</h2>
         <div class="gallery-filters">
             <button class="filter-btn active" onclick="filterGallery('all')">Tutte</button>
-            <button class="filter-btn" onclick="filterGallery('2024')">2024</button>
-            <button class="filter-btn" onclick="filterGallery('2023')">2023</button>
-            <button class="filter-btn" onclick="filterGallery('2022')">2022</button>
-            <button class="filter-btn" onclick="filterGallery('2021')">2021</button>
-            <button class="filter-btn" onclick="filterGallery('precedenti')">Precedenti</button>
+            <button class="filter-btn" onclick="filterGallery('figurativo')">Figurativo</button>
+            <button class="filter-btn" onclick="filterGallery('paesaggistico')">Paesaggistico</button>
+            <button class="filter-btn" onclick="filterGallery('astratto')">Astratto</button>
+            <button class="filter-btn" onclick="filterGallery('natura-morta')">Natura Morta</button>
         </div>
         <div class="gallery-grid" id="galleryGrid">
             <!-- Gallery items will be loaded here dynamically -->
@@ -703,23 +702,25 @@
     <script>
         // Sample artwork data - Replace with your actual artworks
         const artworks = [
-            // 2024
-            { id: 1, title: "Sguardo Velato", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", image: "placeholder-painting1.jpg" },
-            { id: 2, title: "Fiume in Movimento", description: "Paesaggio naturale con tecnica a spatola", year: "2024", image: "placeholder-painting2.jpg" },
-            { id: 3, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", image: "placeholder-painting3.jpg" },
-            { id: 4, title: "Essenza Femminile", description: "Ritratto astratto con accenni viola", year: "2024", image: "placeholder-painting4.jpg" },
+            // Figurativo
+            { id: 1, title: "Con la luce negli occhi", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", genre: "figurativo", image: "paintings/conlalucenegliocchi.jpg" },
+            { id: 5, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", genre: "figurativo", image: "placeholder-painting5.jpg" },
+            { id: 9, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", genre: "figurativo", image: "placeholder-painting9.jpg" },
 
-            // 2023
-            { id: 5, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", image: "placeholder-painting5.jpg" },
-            { id: 6, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", image: "placeholder-painting6.jpg" },
-            { id: 7, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", image: "placeholder-painting7.jpg" },
-            { id: 8, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", image: "placeholder-painting8.jpg" },
+            // Paesaggistico
+            { id: 2, title: "Fiume in Movimento", description: "Paesaggio naturale con tecnica a spatola", year: "2024", genre: "paesaggistico", image: "placeholder-painting2.jpg" },
+            { id: 6, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", genre: "paesaggistico", image: "placeholder-painting6.jpg" },
+            { id: 8, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", genre: "paesaggistico", image: "placeholder-painting8.jpg" },
+            { id: 10, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", genre: "paesaggistico", image: "placeholder-painting10.jpg" },
+            { id: 12, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", genre: "paesaggistico", image: "placeholder-painting12.jpg" },
 
-            // 2022
-            { id: 9, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", image: "placeholder-painting9.jpg" },
-            { id: 10, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", image: "placeholder-painting10.jpg" },
-            { id: 11, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", image: "placeholder-painting11.jpg" },
-            { id: 12, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", image: "placeholder-painting12.jpg" },
+            // Astratto
+            { id: 4, title: "Essenza Femminile", description: "Ritratto astratto con accenni viola", year: "2024", genre: "astratto", image: "placeholder-painting4.jpg" },
+            { id: 7, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", genre: "astratto", image: "placeholder-painting7.jpg" },
+
+            // Natura Morta
+            { id: 3, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", genre: "natura-morta", image: "placeholder-painting3.jpg" },
+            { id: 11, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", genre: "natura-morta", image: "placeholder-painting11.jpg" },
 
             // Add more artworks as needed...
         ];
@@ -751,11 +752,7 @@
             let filtered = artworks;
 
             if (filter !== 'all') {
-                if (filter === 'precedenti') {
-                    filtered = artworks.filter(art => parseInt(art.year) < 2021);
-                } else {
-                    filtered = artworks.filter(art => art.year === filter);
-                }
+                filtered = artworks.filter(art => art.genre === filter);
             }
 
             gallery.innerHTML = filtered.map(art => `
@@ -771,9 +768,9 @@
         }
 
         // Filter gallery
-        function filterGallery(year) {
-            currentFilter = year;
-            loadGallery(year);
+        function filterGallery(genre) {
+            currentFilter = genre;
+            loadGallery(genre);
 
             // Update active button
             document.querySelectorAll('.filter-btn').forEach(btn => {
