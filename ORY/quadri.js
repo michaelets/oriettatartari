@@ -49,7 +49,6 @@ const artworks = [
 ];
 
 // ============================================
-// CONFIGURAZIONE SLIDER - Quali quadri mostrare
+// CONFIGURAZIONE SLIDERS
 // ============================================
 const FEATURED_IDS = [101, 201, 107, 102, 202];
-// Modifica questo array per cambiare i quadri nello slider
