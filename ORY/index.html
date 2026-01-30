@@ -8,6 +8,9 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
     <style>
         * {
             margin: 0;
@@ -117,17 +120,18 @@
             cursor: pointer;
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--secondary-white) 0%, var(--primary-white) 50%, #f0ebe5 100%);
             position: relative;
             overflow: hidden;
+            background: var(--primary-white);
         }
 
+        /* Background image layer - SOSTITUISCI 'hero-background.jpg' CON IL TUO QUADRO */
         .hero::before {
             content: '';
             position: absolute;
@@ -135,13 +139,31 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(139, 115, 85, 0.05) 0%, transparent 50%);
+            background-image: url('paintings/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Subtle overlay for better text readability */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.4) 100%);
+            z-index: 1;
         }
 
         .hero-content {
             text-align: center;
-            z-index: 1;
+            z-index: 2;
             padding: 2rem;
+            position: relative;
         }
 
         .hero h1 {
@@ -342,49 +364,56 @@
         .featured-hero-slider .swiper-pagination {
             bottom: 30px !important;
             z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
         }
 
         .featured-hero-slider .swiper-pagination-bullet {
             background: var(--text-gray);
             opacity: 0.5;
-            width: 14px;
-            height: 14px;
-            margin: 0 6px;
+            width: 10px;
+            height: 10px;
+            margin: 0 4px;
             transition: all 0.3s ease;
         }
 
         .featured-hero-slider .swiper-pagination-bullet-active {
             background: var(--accent-color);
             opacity: 1;
-            width: 40px;
-            border-radius: 7px;
+            width: 30px;
+            border-radius: 5px;
         }
 
-        /* Autoplay control button */
+        /* Autoplay control button - ALLINEATO CORRETTAMENTE */
         .autoplay-control {
             position: absolute;
             bottom: 30px;
-            left: 2rem;
+            left: 50%;
+            transform: translateX(-100px);
             z-index: 20;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid var(--accent-color);
+            background: transparent;
+            border: none;
             color: var(--accent-color);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0.7;
         }
 
         .autoplay-control:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: scale(1.1);
+            opacity: 1;
+            transform: translateX(-100px) scale(1.2);
+        }
+
+        .autoplay-control i {
+            color: var(--accent-color);
         }
 
         /* Gallery Section */
@@ -562,6 +591,18 @@
             border-color: var(--accent-color);
         }
 
+        /* Instagram specific hover color */
+        .social-links a.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            border-color: #bc1888;
+        }
+
+        /* Facebook specific hover color */
+        .social-links a.facebook:hover {
+            background: #1877f2;
+            border-color: #1877f2;
+        }
+
         /* Lightbox Modal */
         .lightbox {
             display: none;
@@ -710,10 +751,12 @@
             }
 
             .autoplay-control {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-                left: 1rem;
+                transform: translateX(-60px);
+                font-size: 0.8rem;
+            }
+
+            .autoplay-control:hover {
+                transform: translateX(-60px) scale(1.2);
             }
 
             .gallery-grid {
@@ -761,10 +804,7 @@
     <header>
         <nav>
             <a href="#" class="logo-container">
-                <!-- Sostituisci "logo.png" con il nome del tuo file PNG -->
                 <img src="logo.png" alt="Orietta Tartari" class="logo-image">
-                <!-- Se il logo non carica, rimuovi il commento sotto per mostrare il testo -->
-                <!-- <span class="logo-text">Orietta Tartari</span> -->
             </a>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
@@ -802,27 +842,23 @@
         </div>
     </section>
 
-    <!-- Featured Works Full-Width Hero Slider Section -->
+    <!-- Featured Works Slider -->
     <section id="featured">
         <h2 class="featured-section-title">Opere in Evidenza</h2>
         <div class="swiper featured-hero-slider">
-            <div class="swiper-wrapper" id="featuredHeroSlider">
-                <!-- Slides will be loaded dynamically -->
-            </div>
+            <div class="swiper-wrapper" id="featuredHeroSlider"></div>
 
-            <!-- Navigation buttons -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
-
-            <!-- Pagination -->
             <div class="swiper-pagination"></div>
 
-            <!-- Autoplay control -->
-            <button class="autoplay-control" id="autoplayBtn" title="Play/Pause">▶</button>
+            <button class="autoplay-control" id="autoplayBtn" title="Pausa/Play automatico">
+                <i class="fas fa-pause"></i>
+            </button>
         </div>
     </section>
 
-    <!-- Full Gallery Section -->
+    <!-- Gallery Section -->
     <section id="gallery">
         <h2 class="section-title">Galleria Completa</h2>
         <div class="gallery-filters">
@@ -832,9 +868,7 @@
             <button class="filter-btn" onclick="filterGallery('astratto')">Astratto</button>
             <button class="filter-btn" onclick="filterGallery('natura-morta')">Natura Morta</button>
         </div>
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Gallery items will be loaded here dynamically -->
-        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
     </section>
 
     <!-- Activities Section -->
@@ -846,25 +880,21 @@
                 <h3>Esposizioni Collettive</h3>
                 <p>Partecipazione a diverse mostre collettive presso gallerie d'arte contemporanea, con focus su tematiche legate all'introspezione e all'identità.</p>
             </div>
-
             <div class="timeline-item fade-in">
                 <div class="year">2023</div>
                 <h3>Mostra Personale "Sguardi Interiori"</h3>
                 <p>Prima mostra personale dedicata alla serie di ritratti che esplorano l'anima attraverso lo sguardo, presentata presso gallerie locali.</p>
             </div>
-
             <div class="timeline-item fade-in">
                 <div class="year">2022</div>
                 <h3>Workshop e Laboratori</h3>
                 <p>Conduzione di workshop artistici per aspiranti pittori, con focus sulle tecniche di ritrattistica e uso del colore.</p>
             </div>
-
             <div class="timeline-item fade-in">
                 <div class="year">2020 - 2021</div>
                 <h3>Serie "Natura e Riflessioni"</h3>
                 <p>Realizzazione di una serie di opere dedicate ai paesaggi naturali e alla loro connessione con il mondo interiore.</p>
             </div>
-
             <div class="timeline-item fade-in">
                 <div class="year">Attività Correnti</div>
                 <h3>Commissioni Private e Progetti Artistici</h3>
@@ -882,9 +912,8 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <span>📧</span>
-                    <a href="mailto:info@oriettatartari.com">oriettatartari67@gmail.com</a>
+                    <a href="mailto:oriettatartari67@gmail.com">oriettatartari67@gmail.com</a>
                 </div>
-
                 <div class="contact-item">
                     <span>📱</span>
                     <a href="tel:+393401234567">+39 340 123 4567</a>
@@ -892,14 +921,16 @@
             </div>
 
             <div class="social-links">
-                <a href="https://instagram.com/oriettatartari" target="_blank" title="Instagram">📷</a>
-                <a href="https://facebook.com/oriettatartari" target="_blank" title="Facebook">👤</a>
-                <a href="https://twitter.com/oriettatartari" target="_blank" title="Twitter">🐦</a>
+                <a href="https://instagram.com/oriettatartari" target="_blank" title="Instagram" class="instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://facebook.com/oriettatartari" target="_blank" title="Facebook" class="facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Orietta Tartari. Tutti i diritti riservati.</p>
     </footer>
@@ -918,19 +949,14 @@
         </div>
     </div>
 
-    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // ============================================
-        // DATABASE QUADRI - Organizzato per categoria
-        // ============================================
         const artworks = [
             // FIGURATIVO (ID 101-199)
             { id: 101, title: "Con la luce negli occhi", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", genre: "figurativo", image: "paintings/conlalucenegliocchi.jpg" },
             { id: 102, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", genre: "figurativo", image: "paintings/opera2.jpg" },
             { id: 103, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", genre: "figurativo", image: "paintings/opera3.jpg" },
-            // Aggiungi nuovi quadri figurativi qui con ID 104, 105, 106...
 
             // PAESAGGISTICO (ID 201-299)
             { id: 201, title: "Occhio", description: "Paesaggio naturale con tecnica a spatola", year: "2024", genre: "paesaggistico", image: "paintings/occhio.jpg" },
@@ -938,46 +964,31 @@
             { id: 203, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", genre: "paesaggistico", image: "paintings/opera6.jpg" },
             { id: 204, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", genre: "paesaggistico", image: "paintings/opera7.jpg" },
             { id: 205, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", genre: "paesaggistico", image: "paintings/opera8.jpg" },
-            // Aggiungi nuovi quadri paesaggistici qui con ID 206, 207, 208...
 
             // ASTRATTO (ID 301-399)
             { id: 301, title: "Essenza Femminile", description: "Ritratto astratto con accenti viola", year: "2024", genre: "astratto", image: "paintings/opera9.jpg" },
             { id: 302, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", genre: "astratto", image: "paintings/opera10.jpg" },
-            // Aggiungi nuovi quadri astratti qui con ID 303, 304, 305...
 
             // NATURA MORTA (ID 401-499)
             { id: 401, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", genre: "natura-morta", image: "paintings/opera11.jpg" },
             { id: 402, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", genre: "natura-morta", image: "paintings/opera12.jpg" },
-            // Aggiungi nuove nature morte qui con ID 403, 404, 405...
         ];
 
-        // ============================================
-        // CONFIGURAZIONE SLIDER - Quadri da mostrare
-        // ============================================
-        // Inserisci qui gli ID dei quadri che vuoi nello slider
-        // Appariranno nell'ordine in cui li scrivi
         const FEATURED_IDS = [101, 201, 301, 102, 202, 401];
-        // Esempio: mostra prima il quadro 101, poi 201, poi 301, ecc.
-        // Puoi modificare questo array per cambiare quali quadri appaiono nello slider
 
         let currentLightboxIndex = 0;
         let currentFilter = 'all';
         let featuredSwiper;
 
-        // Load featured hero slider
         function loadFeaturedHeroSlider() {
             const slider = document.getElementById('featuredHeroSlider');
-
-            // Seleziona i quadri in base agli ID specificati in FEATURED_IDS
             const selected = FEATURED_IDS.map(id => 
                 artworks.find(art => art.id === id)
-            ).filter(art => art !== undefined); // Rimuove eventuali ID non trovati
+            ).filter(art => art !== undefined);
 
             slider.innerHTML = selected.map(art => `
                 <div class="swiper-slide">
-                    <img src="${art.image}" 
-                         alt="${art.title}" 
-                         class="featured-slide-image"
+                    <img src="${art.image}" alt="${art.title}" class="featured-slide-image"
                          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1920\' height=\'1080\'%3E%3Crect fill=\'%23f8f8f8\' width=\'1920\' height=\'1080\'/%3E%3Ctext fill=\'%238b7355\' font-size=\'48\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
                     <div class="featured-slide-overlay">
                         <div class="featured-slide-content">
@@ -989,7 +1000,6 @@
                 </div>
             `).join('');
 
-            // Initialize Swiper
             featuredSwiper = new Swiper('.featured-hero-slider', {
                 slidesPerView: 1,
                 spaceBetween: 0,
@@ -999,9 +1009,7 @@
                     disableOnInteraction: false,
                 },
                 effect: 'fade',
-                fadeEffect: {
-                    crossFade: true
-                },
+                fadeEffect: { crossFade: true },
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
@@ -1013,26 +1021,22 @@
                 speed: 1000,
             });
 
-            // Autoplay control button
             const autoplayBtn = document.getElementById('autoplayBtn');
             let isPlaying = true;
 
             autoplayBtn.addEventListener('click', () => {
                 if (isPlaying) {
                     featuredSwiper.autoplay.stop();
-                    autoplayBtn.textContent = '▶';
+                    autoplayBtn.innerHTML = '<i class="fas fa-play"></i>';
                     isPlaying = false;
                 } else {
                     featuredSwiper.autoplay.start();
-                    autoplayBtn.textContent = '⏸';
+                    autoplayBtn.innerHTML = '<i class="fas fa-pause"></i>';
                     isPlaying = true;
                 }
             });
-
-            autoplayBtn.textContent = '⏸';
         }
 
-        // Load gallery with filter
         function loadGallery(filter = 'all') {
             const gallery = document.getElementById('galleryGrid');
             let filtered = artworks;
@@ -1053,7 +1057,6 @@
             `).join('');
         }
 
-        // Filter gallery
         function filterGallery(genre) {
             currentFilter = genre;
             loadGallery(genre);
@@ -1064,7 +1067,6 @@
             event.target.classList.add('active');
         }
 
-        // Lightbox functions
         function openLightbox(artworkId) {
             const artwork = artworks.find(art => art.id === artworkId);
             if (!artwork) return;
@@ -1096,7 +1098,6 @@
             document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
         }
 
-        // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
@@ -1105,7 +1106,6 @@
             document.getElementById('navLinks').classList.remove('active');
         }
 
-        // Keyboard navigation for lightbox
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('lightbox').classList.contains('active')) {
                 if (e.key === 'ArrowLeft') navigateLightbox(-1);
@@ -1114,7 +1114,6 @@
             }
         });
 
-        // Intersection Observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
