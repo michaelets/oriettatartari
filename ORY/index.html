@@ -183,6 +183,9 @@
             position: relative;
             overflow: hidden;
             background: var(--primary-white);
+            width: 100%;
+            max-width: none;
+            padding: 0;
         }
 
         /* Background image layer */
@@ -216,8 +219,9 @@
         .hero-content {
             text-align: center;
             z-index: 2;
-            padding: 2rem;
+            padding: 3rem;
             position: relative;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .hero h1 {
@@ -225,14 +229,20 @@
             margin-bottom: 1rem;
             color: var(--primary-black);
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1.2s ease-out 0.2s both;
         }
 
         .hero p {
             font-size: clamp(1rem, 3vw, 1.5rem);
             color: var(--text-gray);
             margin-bottom: 2rem;
-            font-weight: 300;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 1.2s ease-out 0.4s both;
         }
 
         .cta-button {
@@ -243,14 +253,27 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: 500;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.2);
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+            animation: fadeInUp 1.2s ease-out 0.6s both;
         }
 
         .cta-button:hover {
             background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Section Styling */
@@ -1005,6 +1028,34 @@
             flex-grow: 1;
         }
 
+        .award-description.truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 13;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .award-description.expanded {
+            display: block;
+        }
+
+        .show-more-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            padding: 0.3rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .show-more-btn:hover {
+            color: var(--accent-light);
+            text-decoration: underline;
+        }
+
         .award-author {
             color: var(--accent-color);
             font-style: italic;
@@ -1274,7 +1325,7 @@
         const awards = [
             {
                 title: "Critica di Alberto d'Atanasio",
-                description: "'Orietta Tartari è la sua pittura e la sua pittura si identifica in lei, totalmente, come in pochi artisti è evidente questa armonia.La sua pittura è pura fantasia, in Tartari lo stile è in un evidente divenire come un crisalide che lascia il guscio spigoloso ed uniforme per liberarsi in farfalla. Le sue tele sono inerenti alla scuola e alla veemenza dell'alieva che vuole invigorire le sue ali, ciò nonostante nelle prime opere è evidente la necessità di quest'artista di creare simboli e stereotipi che avessero identificato non solo le emozioni che danno voce all'anima ma anche i segni del vissuto. L'albero di questa artista dalla sensibilità fanciullesca è simbolo di vitalità, di ciclo vitale,è la rinascita e il rinnovamento che porta con se lo scorrere della vita più che l'inesorabilità del tempo che scorre.In Tartari si ritrovano le sfumature di Chagall, di Savinio, la freschezza di chi sente la missione didattica e didascalica della pittura. Orietta Tartari fissa il sogno e l'inconscio, la parte più nascosta e recondita, quella che più della persona palese che banalmente commercilizza il mondo ha più bisogno di colore, forma e linea'",
+                description: "'Orietta Tartari è la sua pittura e la sua pittura si identifica in lei, totalmente, come in pochi artisti è evidente questa armonia. La sua pittura è pura fantasia, in Tartari lo stile è in un evidente divenire come un crisalide che lascia il guscio spigoloso ed uniforme per liberarsi in farfalla. Le sue tele sono inerenti alla scuola e alla veemenza dell'alieva che vuole invigorire le sue ali, ciò nonostante nelle prime opere è evidente la necessità di quest'artista di creare simboli e stereotipi che avessero identificato non solo le emozioni che danno voce all'anima ma anche i segni del vissuto. L'albero di questa artista dalla sensibilità fanciullesca è simbolo di vitalità, di ciclo vitale,è la rinascita e il rinnovamento che porta con se lo scorrere della vita più che l'inesorabilità del tempo che scorre.In Tartari si ritrovano le sfumature di Chagall, di Savinio, la freschezza di chi sente la missione didattica e didascalica della pittura. Orietta Tartari fissa il sogno e l'inconscio, la parte più nascosta e recondita, quella che più della persona palese che banalmente commercilizza il mondo ha più bisogno di colore, forma e linea.'",
                 author: "Alberto d'Atanasio - Storico dell'Arte"
             },
             {
@@ -1318,19 +1369,23 @@
         function loadAwardsSlider() {
             const slider = document.getElementById('awardsSlider');
             
-            slider.innerHTML = awards.map(award => `
+            slider.innerHTML = awards.map((award, index) => {
+                const shouldTruncate = award.description.length > 500;
+                return `
                 <div class="swiper-slide">
                     <div class="award-card fade-in">
                         ${award.image ? `<img src="${award.image}" alt="${award.title}" class="award-image"
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'400\\'%3E%3Crect fill=\\'%23f8f8f8\\' width=\\'600\\' height=\\'400\\'/%3E%3Ctext fill=\\'%238b7355\\' font-size=\\'24\\' font-family=\\'Arial\\' x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' dy=\\'.3em\\'%3E${award.title}%3C/text%3E%3C/svg%3E'>` : ''}
                         <div class="award-content">
                             <h3>${award.title}</h3>
-                            <p class="award-description">${award.description}</p>
+                            <p class="award-description ${shouldTruncate ? 'truncated' : ''}" id="award-desc-${index}">${award.description}</p>
+                            ${shouldTruncate ? `<button class="show-more-btn" onclick="toggleDescription(${index})">Mostra di più</button>` : ''}
                             <p class="award-author">— ${award.author}</p>
                         </div>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
 
             awardsSwiper = new Swiper('.awards-slider', {
                 slidesPerView: 1,
@@ -1356,6 +1411,21 @@
                 },
                 speed: 800,
             });
+        }
+
+        function toggleDescription(index) {
+            const desc = document.getElementById(`award-desc-${index}`);
+            const btn = event.target;
+            
+            if (desc.classList.contains('truncated')) {
+                desc.classList.remove('truncated');
+                desc.classList.add('expanded');
+                btn.textContent = 'Mostra meno';
+            } else {
+                desc.classList.add('truncated');
+                desc.classList.remove('expanded');
+                btn.textContent = 'Mostra di più';
+            }
         }
 
         function loadFeaturedHeroSlider() {
