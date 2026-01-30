@@ -16,19 +16,21 @@
         }
 
         :root {
+            --primary-white: #ffffff;
+            --secondary-white: #f8f8f8;
             --primary-black: #1a1a1a;
             --secondary-black: #2d2d2d;
-            --primary-purple: #8b5cf6;
-            --secondary-purple: #a78bfa;
-            --light-purple: #c4b5fd;
-            --text-light: #e5e5e5;
-            --text-gray: #a0a0a0;
+            --accent-color: #8b7355;
+            --accent-light: #a89080;
+            --text-dark: #1a1a1a;
+            --text-gray: #666666;
+            --border-color: #e0e0e0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-black);
-            color: var(--text-light);
+            background-color: var(--primary-white);
+            color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -38,11 +40,12 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav {
@@ -53,10 +56,21 @@
             align-items: center;
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-purple);
+            color: var(--accent-color);
             text-decoration: none;
             letter-spacing: 1px;
         }
@@ -68,7 +82,7 @@
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--text-dark);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
@@ -76,7 +90,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary-purple);
+            color: var(--accent-color);
         }
 
         .nav-links a::after {
@@ -86,7 +100,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary-purple);
+            background: var(--accent-color);
             transition: width 0.3s ease;
         }
 
@@ -98,7 +112,7 @@
             display: none;
             background: none;
             border: none;
-            color: var(--text-light);
+            color: var(--text-dark);
             font-size: 1.5rem;
             cursor: pointer;
         }
@@ -109,7 +123,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, #3d2a5c 100%);
+            background: linear-gradient(135deg, var(--secondary-white) 0%, var(--primary-white) 50%, #f0ebe5 100%);
             position: relative;
             overflow: hidden;
         }
@@ -121,7 +135,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(139, 115, 85, 0.05) 0%, transparent 50%);
         }
 
         .hero-content {
@@ -133,34 +147,34 @@
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 5rem);
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-light) 0%, var(--light-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-black);
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
         .hero p {
             font-size: clamp(1rem, 3vw, 1.5rem);
             color: var(--text-gray);
             margin-bottom: 2rem;
+            font-weight: 300;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1rem 2.5rem;
-            background: var(--primary-purple);
+            background: var(--accent-color);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.2);
         }
 
         .cta-button:hover {
-            background: var(--secondary-purple);
+            background: var(--accent-light);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 6px 20px rgba(139, 115, 85, 0.3);
         }
 
         /* Section Styling */
@@ -174,16 +188,18 @@
             font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 3rem;
             text-align: center;
-            color: var(--primary-purple);
+            color: var(--accent-color);
             position: relative;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .section-title::after {
             content: '';
             display: block;
             width: 80px;
-            height: 3px;
-            background: var(--primary-purple);
+            height: 2px;
+            background: var(--accent-color);
             margin: 1rem auto;
         }
 
@@ -199,7 +215,7 @@
             width: 100%;
             max-width: 400px;
             border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
 
@@ -222,29 +238,31 @@
             padding: 0;
             max-width: 100%;
             margin: 0;
-            background: var(--primary-black);
+            background: var(--secondary-white);
         }
 
         .featured-section-title {
             font-size: clamp(2rem, 5vw, 3rem);
             padding: 3rem 2rem 2rem 2rem;
             text-align: center;
-            color: var(--primary-purple);
+            color: var(--accent-color);
             position: relative;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .featured-section-title::after {
             content: '';
             display: block;
             width: 80px;
-            height: 3px;
-            background: var(--primary-purple);
+            height: 2px;
+            background: var(--accent-color);
             margin: 1rem auto;
         }
 
         .featured-hero-slider {
             width: 100%;
-            height: 90vh;
+            height: 80vh;
             position: relative;
         }
 
@@ -267,7 +285,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.95) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, transparent 100%);
             padding: 3rem 2rem;
             z-index: 10;
         }
@@ -279,8 +297,9 @@
 
         .featured-slide-content h3 {
             font-size: clamp(1.8rem, 4vw, 3rem);
-            color: var(--primary-purple);
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
+            font-weight: 400;
         }
 
         .featured-slide-content p {
@@ -291,19 +310,20 @@
 
         .featured-slide-content .year {
             font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            color: var(--secondary-purple);
+            color: var(--accent-light);
             font-weight: 600;
         }
 
         /* Swiper Navigation for Hero Slider */
         .featured-hero-slider .swiper-button-next,
         .featured-hero-slider .swiper-button-prev {
-            color: white;
-            background: rgba(139, 92, 246, 0.5);
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.9);
             width: 60px;
             height: 60px;
             border-radius: 50%;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .featured-hero-slider .swiper-button-next:after,
@@ -314,7 +334,8 @@
 
         .featured-hero-slider .swiper-button-next:hover,
         .featured-hero-slider .swiper-button-prev:hover {
-            background: var(--primary-purple);
+            background: var(--accent-color);
+            color: white;
         }
 
         /* Swiper Pagination for Hero Slider */
@@ -324,7 +345,7 @@
         }
 
         .featured-hero-slider .swiper-pagination-bullet {
-            background: white;
+            background: var(--text-gray);
             opacity: 0.5;
             width: 14px;
             height: 14px;
@@ -333,7 +354,7 @@
         }
 
         .featured-hero-slider .swiper-pagination-bullet-active {
-            background: var(--primary-purple);
+            background: var(--accent-color);
             opacity: 1;
             width: 40px;
             border-radius: 7px;
@@ -345,9 +366,9 @@
             bottom: 30px;
             left: 2rem;
             z-index: 20;
-            background: rgba(139, 92, 246, 0.5);
-            border: none;
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -357,10 +378,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .autoplay-control:hover {
-            background: var(--primary-purple);
+            background: var(--accent-color);
+            color: white;
             transform: scale(1.1);
         }
 
@@ -375,9 +398,9 @@
 
         .filter-btn {
             padding: 0.7rem 1.5rem;
-            background: var(--secondary-black);
-            color: var(--text-light);
-            border: 2px solid var(--primary-purple);
+            background: var(--primary-white);
+            color: var(--text-dark);
+            border: 2px solid var(--accent-color);
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -386,7 +409,7 @@
 
         .filter-btn:hover,
         .filter-btn.active {
-            background: var(--primary-purple);
+            background: var(--accent-color);
             color: white;
         }
 
@@ -397,17 +420,18 @@
         }
 
         .artwork-card {
-            background: var(--secondary-black);
+            background: var(--primary-white);
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
         }
 
         .artwork-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 115, 85, 0.2);
         }
 
         .artwork-image {
@@ -419,12 +443,14 @@
 
         .artwork-info {
             padding: 1.5rem;
+            background: var(--primary-white);
         }
 
         .artwork-info h3 {
-            color: var(--primary-purple);
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
+            font-weight: 500;
         }
 
         .artwork-info p {
@@ -442,18 +468,20 @@
             position: relative;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            background: var(--secondary-black);
+            background: var(--secondary-white);
             border-radius: 10px;
-            border-left: 4px solid var(--primary-purple);
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .timeline-item h3 {
-            color: var(--primary-purple);
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .timeline-item .year {
-            color: var(--secondary-purple);
+            color: var(--accent-light);
             font-weight: 600;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
@@ -483,18 +511,24 @@
             justify-content: center;
             gap: 1rem;
             padding: 1rem;
-            background: var(--secondary-black);
+            background: var(--secondary-white);
             border-radius: 10px;
             transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
         }
 
         .contact-item:hover {
-            background: var(--primary-purple);
+            background: var(--accent-color);
             transform: translateX(5px);
+            border-color: var(--accent-color);
+        }
+
+        .contact-item:hover a {
+            color: white;
         }
 
         .contact-item a {
-            color: var(--text-light);
+            color: var(--text-dark);
             text-decoration: none;
             font-size: 1.1rem;
         }
@@ -512,18 +546,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--secondary-black);
+            background: var(--secondary-white);
             border-radius: 50%;
-            color: var(--primary-purple);
+            color: var(--accent-color);
             font-size: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            border: 1px solid var(--border-color);
         }
 
         .social-links a:hover {
-            background: var(--primary-purple);
+            background: var(--accent-color);
             color: white;
             transform: translateY(-5px);
+            border-color: var(--accent-color);
         }
 
         /* Lightbox Modal */
@@ -534,7 +570,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             z-index: 2000;
             align-items: center;
             justify-content: center;
@@ -556,6 +592,7 @@
             max-height: 80vh;
             object-fit: contain;
             border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
         }
 
         .lightbox-info {
@@ -564,7 +601,7 @@
         }
 
         .lightbox-info h3 {
-            color: var(--primary-purple);
+            color: var(--accent-color);
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
@@ -579,32 +616,34 @@
             right: 0;
             background: none;
             border: none;
-            color: white;
+            color: var(--text-dark);
             font-size: 2rem;
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
         .lightbox-close:hover {
-            color: var(--primary-purple);
+            color: var(--accent-color);
         }
 
         .lightbox-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(139, 92, 246, 0.8);
-            border: none;
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
             font-size: 2rem;
             padding: 1rem;
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .lightbox-nav:hover {
-            background: var(--primary-purple);
+            background: var(--accent-color);
+            color: white;
         }
 
         .lightbox-prev {
@@ -617,10 +656,11 @@
 
         /* Footer */
         footer {
-            background: var(--secondary-black);
+            background: var(--secondary-white);
             padding: 2rem;
             text-align: center;
             color: var(--text-gray);
+            border-top: 1px solid var(--border-color);
         }
 
         /* Responsive Design */
@@ -630,10 +670,11 @@
                 top: 70px;
                 left: -100%;
                 flex-direction: column;
-                background: rgba(26, 26, 26, 0.98);
+                background: rgba(255, 255, 255, 0.98);
                 width: 100%;
                 padding: 2rem;
                 transition: left 0.3s ease;
+                border-right: 1px solid var(--border-color);
             }
 
             .nav-links.active {
@@ -719,7 +760,12 @@
     <!-- Header Navigation -->
     <header>
         <nav>
-            <a href="#" class="logo">Orietta Tartari</a>
+            <a href="#" class="logo-container">
+                <!-- Sostituisci "logo.png" con il nome del tuo file PNG -->
+                <img src="logo.png" alt="Orietta Tartari" class="logo-image">
+                <!-- Se il logo non carica, rimuovi il commento sotto per mostrare il testo -->
+                <!-- <span class="logo-text">Orietta Tartari</span> -->
+            </a>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
@@ -876,28 +922,43 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // Sample artwork data
+        // ============================================
+        // DATABASE QUADRI - Organizzato per categoria
+        // ============================================
         const artworks = [
-            // Figurativo
-            { id: 1, title: "Con la luce negli occhi", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", genre: "figurativo", image: "paintings/conlalucenegliocchi.jpg" },
-            { id: 5, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", genre: "figurativo", image: "placeholder-painting5.jpg" },
-            { id: 9, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", genre: "figurativo", image: "placeholder-painting9.jpg" },
+            // FIGURATIVO (ID 101-199)
+            { id: 101, title: "Con la luce negli occhi", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", genre: "figurativo", image: "paintings/conlalucenegliocchi.jpg" },
+            { id: 102, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", genre: "figurativo", image: "paintings/opera2.jpg" },
+            { id: 103, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", genre: "figurativo", image: "paintings/opera3.jpg" },
+            // Aggiungi nuovi quadri figurativi qui con ID 104, 105, 106...
 
-            // Paesaggistico
-            { id: 2, title: "Occhio", description: "Paesaggio naturale con tecnica a spatola", year: "2024", genre: "paesaggistico", image: "paintings/occhio.jpg" },
-            { id: 6, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", genre: "paesaggistico", image: "placeholder-painting6.jpg" },
-            { id: 8, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", genre: "paesaggistico", image: "placeholder-painting8.jpg" },
-            { id: 10, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", genre: "paesaggistico", image: "placeholder-painting10.jpg" },
-            { id: 12, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", genre: "paesaggistico", image: "placeholder-painting12.jpg" },
+            // PAESAGGISTICO (ID 201-299)
+            { id: 201, title: "Occhio", description: "Paesaggio naturale con tecnica a spatola", year: "2024", genre: "paesaggistico", image: "paintings/occhio.jpg" },
+            { id: 202, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", genre: "paesaggistico", image: "paintings/opera5.jpg" },
+            { id: 203, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", genre: "paesaggistico", image: "paintings/opera6.jpg" },
+            { id: 204, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", genre: "paesaggistico", image: "paintings/opera7.jpg" },
+            { id: 205, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", genre: "paesaggistico", image: "paintings/opera8.jpg" },
+            // Aggiungi nuovi quadri paesaggistici qui con ID 206, 207, 208...
 
-            // Astratto
-            { id: 4, title: "Essenza Femminile", description: "Ritratto astratto con accenni viola", year: "2024", genre: "astratto", image: "placeholder-painting4.jpg" },
-            { id: 7, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", genre: "astratto", image: "placeholder-painting7.jpg" },
+            // ASTRATTO (ID 301-399)
+            { id: 301, title: "Essenza Femminile", description: "Ritratto astratto con accenti viola", year: "2024", genre: "astratto", image: "paintings/opera9.jpg" },
+            { id: 302, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", genre: "astratto", image: "paintings/opera10.jpg" },
+            // Aggiungi nuovi quadri astratti qui con ID 303, 304, 305...
 
-            // Natura Morta
-            { id: 3, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", genre: "natura-morta", image: "placeholder-painting3.jpg" },
-            { id: 11, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", genre: "natura-morta", image: "placeholder-painting11.jpg" },
+            // NATURA MORTA (ID 401-499)
+            { id: 401, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", genre: "natura-morta", image: "paintings/opera11.jpg" },
+            { id: 402, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", genre: "natura-morta", image: "paintings/opera12.jpg" },
+            // Aggiungi nuove nature morte qui con ID 403, 404, 405...
         ];
+
+        // ============================================
+        // CONFIGURAZIONE SLIDER - Quadri da mostrare
+        // ============================================
+        // Inserisci qui gli ID dei quadri che vuoi nello slider
+        // Appariranno nell'ordine in cui li scrivi
+        const FEATURED_IDS = [101, 201, 301, 102, 202, 401];
+        // Esempio: mostra prima il quadro 101, poi 201, poi 301, ecc.
+        // Puoi modificare questo array per cambiare quali quadri appaiono nello slider
 
         let currentLightboxIndex = 0;
         let currentFilter = 'all';
@@ -906,15 +967,18 @@
         // Load featured hero slider
         function loadFeaturedHeroSlider() {
             const slider = document.getElementById('featuredHeroSlider');
-            const selected = artworks.filter(art => [1, 2, 4, 5, 7, 9].includes(art.id));
 
+            // Seleziona i quadri in base agli ID specificati in FEATURED_IDS
+            const selected = FEATURED_IDS.map(id => 
+                artworks.find(art => art.id === id)
+            ).filter(art => art !== undefined); // Rimuove eventuali ID non trovati
 
             slider.innerHTML = selected.map(art => `
                 <div class="swiper-slide">
                     <img src="${art.image}" 
                          alt="${art.title}" 
                          class="featured-slide-image"
-                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1920\' height=\'1080\'%3E%3Crect fill=\'%232d2d2d\' width=\'1920\' height=\'1080\'/%3E%3Ctext fill=\'%238b5cf6\' font-size=\'48\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1920\' height=\'1080\'%3E%3Crect fill=\'%23f8f8f8\' width=\'1920\' height=\'1080\'/%3E%3Ctext fill=\'%238b7355\' font-size=\'48\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
                     <div class="featured-slide-overlay">
                         <div class="featured-slide-content">
                             <h3>${art.title}</h3>
@@ -965,7 +1029,6 @@
                 }
             });
 
-            // Set initial button state
             autoplayBtn.textContent = '⏸';
         }
 
@@ -980,11 +1043,11 @@
 
             gallery.innerHTML = filtered.map(art => `
                 <div class="artwork-card fade-in" onclick="openLightbox(${art.id})">
-                    <img src="${art.image}" alt="${art.title}" class="artwork-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'350\'%3E%3Crect fill=\'%232d2d2d\' width=\'400\' height=\'350\'/%3E%3Ctext fill=\'%238b5cf6\' font-size=\'20\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
+                    <img src="${art.image}" alt="${art.title}" class="artwork-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'350\'%3E%3Crect fill=\'%23f8f8f8\' width=\'400\' height=\'350\'/%3E%3Ctext fill=\'%238b7355\' font-size=\'20\' font-family=\'Arial\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3E${art.title}%3C/text%3E%3C/svg%3E'">
                     <div class="artwork-info">
                         <h3>${art.title}</h3>
                         <p>${art.description}</p>
-                        <p style="color: var(--primary-purple); margin-top: 0.5rem;">${art.year}</p>
+                        <p style="color: var(--accent-color); margin-top: 0.5rem;">${art.year}</p>
                     </div>
                 </div>
             `).join('');
