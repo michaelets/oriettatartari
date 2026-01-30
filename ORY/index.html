@@ -890,6 +890,50 @@
         .fade-in {
             animation: fadeIn 0.6s ease-out;
         }
+
+        /* ============================================
+           STATUS BADGE NEL LIGHTBOX
+           ============================================ */
+        .lightbox-status {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .lightbox-status .artwork-status {
+            display: inline-block;
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .status-private {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+        }
+
+        /* Mobile: badge più piccolo e posizione adattata */
+        @media (max-width: 768px) {
+            .lightbox-status {
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .lightbox-status .artwork-status {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -977,26 +1021,31 @@
 
     <!-- Activities Section -->
     <section id="activities">
-        <h2 class="section-title">Attività ed Eventi</h2>
+        <h2 class="section-title">Attività ed Eventi Principali</h2>
         <div class="activities-timeline">
             <div class="timeline-item fade-in">
-                <div class="year">2024 - Presente</div>
-                <h3>Esposizioni Collettive</h3>
+                <div class="year">2021</div>
+                <h3>Premio Vittorio Sgarbi</h3>
                 <p>Partecipazione a diverse mostre collettive presso gallerie d'arte contemporanea, con focus su tematiche legate all'introspezione e all'identità.</p>
             </div>
             <div class="timeline-item fade-in">
                 <div class="year">2023</div>
-                <h3>Mostra Personale "Sguardi Interiori"</h3>
+                <h3>Mostra Via Margutta, Roma</h3>
                 <p>Prima mostra personale dedicata alla serie di ritratti che esplorano l'anima attraverso lo sguardo, presentata presso gallerie locali.</p>
             </div>
             <div class="timeline-item fade-in">
-                <div class="year">2022</div>
-                <h3>Workshop e Laboratori</h3>
+                <div class="year">2023</div>
+                <h3>Mostra Città di New York</h3>
+                <p>Prima mostra personale dedicata alla serie di ritratti che esplorano l'anima attraverso lo sguardo, presentata presso gallerie locali.</p>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="year">2022 - Presente</div>
+                <h3>Laboratorio di Arteterapia</h3>
                 <p>Conduzione di workshop artistici per aspiranti pittori, con focus sulle tecniche di ritrattistica e uso del colore.</p>
             </div>
             <div class="timeline-item fade-in">
-                <div class="year">2020 - 2021</div>
-                <h3>Serie "Natura e Riflessioni"</h3>
+                <div class="year">2020 - Presente</div>
+                <h3>Corsi di Pittura</h3>
                 <p>Realizzazione di una serie di opere dedicate ai paesaggi naturali e alla loro connessione con il mondo interiore.</p>
             </div>
             <div class="timeline-item fade-in">
@@ -1046,6 +1095,7 @@
             <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
             <img src="" alt="" class="lightbox-image" id="lightboxImage">
             <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+            <div class="lightbox-status" id="lightboxStatus"></div>
             <div class="lightbox-info">
                 <h3 id="lightboxTitle"></h3>
                 <p id="lightboxDescription"></p>
@@ -1158,6 +1208,7 @@
             document.getElementById('lightboxImage').src = artwork.image;
             document.getElementById('lightboxTitle').textContent = artwork.title;
             document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+            document.getElementById('lightboxStatus').innerHTML = getStatusBadge(artwork.status);
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1178,6 +1229,7 @@
             document.getElementById('lightboxImage').src = artwork.image;
             document.getElementById('lightboxTitle').textContent = artwork.title;
             document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+            document.getElementById('lightboxStatus').innerHTML = getStatusBadge(artwork.status);
         }
 
         function toggleMenu() {
