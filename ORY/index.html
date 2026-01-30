@@ -866,7 +866,6 @@
             <button class="filter-btn" onclick="filterGallery('figurativo')">Figurativo</button>
             <button class="filter-btn" onclick="filterGallery('paesaggistico')">Paesaggistico</button>
             <button class="filter-btn" onclick="filterGallery('astratto')">Astratto</button>
-            <button class="filter-btn" onclick="filterGallery('natura-morta')">Natura Morta</button>
         </div>
         <div class="gallery-grid" id="galleryGrid"></div>
     </section>
@@ -916,12 +915,12 @@
                 </div>
                 <div class="contact-item">
                     <span>📱</span>
-                    <a href="tel:+393401234567">+39 340 123 4567</a>
+                    <a href="tel:+393401234567">+39 339 874 5506</a>
                 </div>
             </div>
 
             <div class="social-links">
-                <a href="https://instagram.com/oriettatartari" target="_blank" title="Instagram" class="instagram">
+                <a href="https://instagram.com/orytartari" target="_blank" title="Instagram" class="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://facebook.com/oriettatartari" target="_blank" title="Facebook" class="facebook">
@@ -950,31 +949,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="quadri.js"></script>
 
     <script>
-        const artworks = [
-            // FIGURATIVO (ID 101-199)
-            { id: 101, title: "Con la luce negli occhi", description: "Ritratto in bianco e nero, esplorazione dell'identità", year: "2024", genre: "figurativo", image: "paintings/conlalucenegliocchi.jpg" },
-            { id: 102, title: "Occhi dell'Anima", description: "Serie ritratti - focus sullo sguardo", year: "2023", genre: "figurativo", image: "paintings/opera2.jpg" },
-            { id: 103, title: "Volto Nascosto", description: "Ritratto con elementi di mistero", year: "2022", genre: "figurativo", image: "paintings/opera3.jpg" },
-
-            // PAESAGGISTICO (ID 201-299)
-            { id: 201, title: "Occhio", description: "Paesaggio naturale con tecnica a spatola", year: "2024", genre: "paesaggistico", image: "paintings/occhio.jpg" },
-            { id: 202, title: "Bosco Mistico", description: "Paesaggio boschivo con atmosfera onirica", year: "2023", genre: "paesaggistico", image: "paintings/opera5.jpg" },
-            { id: 203, title: "Tramonto Mediterraneo", description: "Marina con colori caldi del tramonto", year: "2023", genre: "paesaggistico", image: "paintings/opera6.jpg" },
-            { id: 204, title: "Cascata Vitale", description: "Acqua in movimento con tecnica dinamica", year: "2022", genre: "paesaggistico", image: "paintings/opera7.jpg" },
-            { id: 205, title: "Silenzio Urbano", description: "Paesaggio urbano notturno", year: "2022", genre: "paesaggistico", image: "paintings/opera8.jpg" },
-
-            // ASTRATTO (ID 301-399)
-            { id: 301, title: "Essenza Femminile", description: "Ritratto astratto con accenti viola", year: "2024", genre: "astratto", image: "paintings/opera9.jpg" },
-            { id: 302, title: "Armonia Interiore", description: "Composizione astratta circolare", year: "2023", genre: "astratto", image: "paintings/opera10.jpg" },
-
-            // NATURA MORTA (ID 401-499)
-            { id: 401, title: "Riflessioni d'Autunno", description: "Natura morta con toni caldi", year: "2024", genre: "natura-morta", image: "paintings/opera11.jpg" },
-            { id: 402, title: "Primavera Risveglio", description: "Fiori e natura in esplosione di colori", year: "2022", genre: "natura-morta", image: "paintings/opera12.jpg" },
-        ];
-
-        const FEATURED_IDS = [101, 201, 301, 102, 202, 401];
+        // I dati dei quadri vengono caricati dal file quadri.js
 
         let currentLightboxIndex = 0;
         let currentFilter = 'all';
