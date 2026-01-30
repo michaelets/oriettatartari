@@ -31,7 +31,7 @@
     <meta name="google-site-verification" content="cySbfUYF0ybAhf95to82FUNKgWTQKrAJzTweDPKVB-4" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -1442,7 +1442,7 @@
                         <div class="featured-slide-content">
                             <h3>${art.title}</h3>
                             <p>${art.description}</p>
-                            <p class="year">${art.year}</p>
+                            <p class="year">${art.dimensions} • ${art.technique}</p>
                         </div>
                     </div>
                 </div>
@@ -1500,7 +1500,7 @@
                     <div class="artwork-info">
                         <h3>${art.title}</h3>
                         <p>${art.description}</p>
-                        <p style="color: var(--accent-color); margin-top: 0.5rem;">${art.year}</p>
+                        <p style="color: var(--accent-color); margin-top: 0.5rem;">${art.dimensions} • ${art.technique}</p>
                     </div>
                 </div>
             `).join('');
@@ -1524,7 +1524,7 @@
 
             document.getElementById('lightboxImage').src = artwork.image;
             document.getElementById('lightboxTitle').textContent = artwork.title;
-            document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+            document.getElementById('lightboxDescription').textContent = `${artwork.description} • ${artwork.dimensions} • ${artwork.technique}`;
             document.getElementById('lightboxStatus').innerHTML = getStatusBadge(artwork.status);
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1545,7 +1545,7 @@
             const artwork = artworks[currentLightboxIndex];
             document.getElementById('lightboxImage').src = artwork.image;
             document.getElementById('lightboxTitle').textContent = artwork.title;
-            document.getElementById('lightboxDescription').textContent = `${artwork.description} - ${artwork.year}`;
+            document.getElementById('lightboxDescription').textContent = `${artwork.description} • ${artwork.dimensions} • ${artwork.technique}`;
             document.getElementById('lightboxStatus').innerHTML = getStatusBadge(artwork.status);
         }
 
