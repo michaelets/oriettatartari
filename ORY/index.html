@@ -896,7 +896,7 @@
            ============================================ */
         .lightbox-status {
             position: absolute;
-            bottom: 20px;
+            top: 20px;
             left: 20px;
             z-index: 10;
         }
@@ -910,6 +910,11 @@
             letter-spacing: 0.5px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
+            opacity: 0.75;
+        }
+
+        .lightbox-status .artwork-status:hover {
+            opacity: 1;
         }
 
         .status-available {
@@ -925,13 +930,157 @@
         /* Mobile: badge più piccolo e posizione adattata */
         @media (max-width: 768px) {
             .lightbox-status {
-                bottom: 10px;
+                top: 10px;
                 left: 10px;
             }
 
             .lightbox-status .artwork-status {
                 padding: 0.5rem 1rem;
                 font-size: 0.8rem;
+            }
+        }
+
+        /* ============================================
+           CRITICHE E RICONOSCIMENTI SECTION
+           ============================================ */
+        #awards {
+            background: var(--secondary-white);
+        }
+
+        .awards-slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .awards-slider {
+            padding: 2rem 0;
+        }
+
+        .award-card {
+            background: var(--primary-white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(139, 115, 85, 0.15);
+        }
+
+        .award-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            background: var(--secondary-white);
+        }
+
+        .award-content h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .award-year {
+            color: var(--accent-light);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .award-description {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        .award-author {
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Swiper Navigation for Awards */
+        .awards-slider .swiper-button-next,
+        .awards-slider .swiper-button-prev {
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.95);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .awards-slider .swiper-button-next:after,
+        .awards-slider .swiper-button-prev:after {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .awards-slider .swiper-button-next:hover,
+        .awards-slider .swiper-button-prev:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .awards-slider .swiper-pagination {
+            bottom: 0 !important;
+        }
+
+        .awards-slider .swiper-pagination-bullet {
+            background: var(--text-gray);
+            opacity: 0.4;
+            width: 10px;
+            height: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .awards-slider .swiper-pagination-bullet-active {
+            background: var(--accent-color);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Mobile awards */
+        @media (max-width: 768px) {
+            .awards-slider-container {
+                padding: 0 1rem;
+            }
+
+            .award-card {
+                padding: 1.5rem;
+            }
+
+            .award-image {
+                height: 200px;
+            }
+
+            .award-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .awards-slider .swiper-button-next,
+            .awards-slider .swiper-button-prev {
+                width: 40px;
+                height: 40px;
+            }
+
+            .awards-slider .swiper-button-next:after,
+            .awards-slider .swiper-button-prev:after {
+                font-size: 16px;
             }
         }
     </style>
@@ -950,6 +1099,7 @@
                 <li><a href="#featured" onclick="closeMenu()">Opere</a></li>
                 <li><a href="#gallery" onclick="closeMenu()">Galleria</a></li>
                 <li><a href="#activities" onclick="closeMenu()">Attività</a></li>
+                <li><a href="#awards" onclick="closeMenu()">Riconoscimenti</a></li>
                 <li><a href="#contact" onclick="closeMenu()">Contatti</a></li>
             </ul>
         </nav>
@@ -1056,6 +1206,19 @@
         </div>
     </section>
 
+    <!-- Critiche e Riconoscimenti Section -->
+    <section id="awards">
+        <h2 class="section-title">Critiche e Riconoscimenti</h2>
+        <div class="awards-slider-container">
+            <div class="swiper awards-slider">
+                <div class="swiper-wrapper" id="awardsSlider"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Contatti</h2>
@@ -1107,9 +1270,93 @@
     <script src="quadri.js"></script>
 
     <script>
+        // Dati Critiche e Riconoscimenti
+        const awards = [
+            {
+                title: "Critica di Alberto d'Atanasio",
+                description: "'Orietta Tartari è la sua pittura e la sua pittura si identifica in lei, totalmente, come in pochi artisti è evidente questa armonia.La sua pittura è pura fantasia, in Tartari lo stile è in un evidente divenire come un crisalide che lascia il guscio spigoloso ed uniforme per liberarsi in farfalla. Le sue tele sono inerenti alla scuola e alla veemenza dell'alieva che vuole invigorire le sue ali, ciò nonostante nelle prime opere è evidente la necessità di quest'artista di creare simboli e stereotipi che avessero identificato non solo le emozioni che danno voce all'anima ma anche i segni del vissuto. L'albero di questa artista dalla sensibilità fanciullesca è simbolo di vitalità, di ciclo vitale,è la rinascita e il rinnovamento che porta con se lo scorrere della vita più che l'inesorabilità del tempo che scorre.In Tartari si ritrovano le sfumature di Chagall, di Savinio, la freschezza di chi sente la missione didattica e didascalica della pittura. Orietta Tartari fissa il sogno e l'inconscio, la parte più nascosta e recondita, quella che più della persona palese che banalmente commercilizza il mondo ha più bisogno di colore, forma e linea'",
+                author: "Alberto d'Atanasio - Storico dell'Arte"
+            },
+            {
+                title: "Premio Vittorio Sgarbi",
+                year: "2021",
+                description: "Riconoscimento per l'eccellenza artistica nella pittura contemporanea, con particolare menzione per l'uso espressivo del colore e la capacità di evocare emozioni profonde attraverso la rappresentazione della figura femminile.",
+                author: "Vittorio Sgarbi - Critico d'Arte",
+                image: "awards/premio-sgarbi.jpg"
+            },
+            {
+                title: "Mostra Via Margutta",
+                year: "2023",
+                description: "Esposizione personale nella prestigiosa Via Margutta a Roma, cuore storico dell'arte italiana. Le opere hanno ricevuto ampi consensi dalla critica per la loro profondità introspettiva e tecnica raffinata.",
+                author: "Galleria d'Arte Via Margutta, Roma",
+                image: "awards/via-margutta.jpg"
+            },
+            {
+                title: "Critica della Prof.ssa Maria Lucchi",
+                year: "2023",
+                description: "'Si ha la sensazione considerando i dipinti di Orietta Tartari, che il tempo si sia fermato, che passato e futuro non esistano più. C'è una fusione tra materia e immaginario la vediamo spesso in quei sviluppi radicali che salgono sulla terra per dare figura a piante e persino ad una crocifissione originalissima.'",
+                author: "Maria Lucchi - Praxis Artistica",
+            },
+            {
+                title: "Recensione Sonia Terzino",
+                year: "2022",
+                description: "'In pochi artisti come in Orietta Tartari la pittura diventa poesia, un linguaggio romantico che cerca di andare alla radice delle cose e dell'essere. Sulle tele aleggia il profumo di una dolce e lontana melodia...'",
+                author: "Sonia Terzino - Critica d'Arte",
+            },
+            {
+                title: "Articolo su il Messaggero",
+                description: "'Orietta Tartari è un'artista che vive un percorso diverso, non scandito da mostre ravvicinate ma vissuto con grande intensità, perché caratterizzato da una ricerca personale forte e impegnata. Nonostante la giovane età dipinge da tantissimi anni e da tantissimi anni ama la pittura.Nei suoi quadri prendono forma i messaggi di un'anima che si esprime con linee semplici, pulite, essenziali e raffinate.Per Orietta Tartari l'attività dell'artista è prima di tutto ricerca.'",
+                author: "Lucilla Piccioni - il Messaggero",
+            }
+        ];
+
         let currentLightboxIndex = 0;
         let currentFilter = 'all';
         let featuredSwiper;
+        let awardsSwiper;
+
+        function loadAwardsSlider() {
+            const slider = document.getElementById('awardsSlider');
+            
+            slider.innerHTML = awards.map(award => `
+                <div class="swiper-slide">
+                    <div class="award-card fade-in">
+                        ${award.image ? `<img src="${award.image}" alt="${award.title}" class="award-image"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'400\\'%3E%3Crect fill=\\'%23f8f8f8\\' width=\\'600\\' height=\\'400\\'/%3E%3Ctext fill=\\'%238b7355\\' font-size=\\'24\\' font-family=\\'Arial\\' x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' dy=\\'.3em\\'%3E${award.title}%3C/text%3E%3C/svg%3E'>` : ''}
+                        <div class="award-content">
+                            <h3>${award.title}</h3>
+                            <p class="award-description">${award.description}</p>
+                            <p class="award-author">— ${award.author}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            awardsSwiper = new Swiper('.awards-slider', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 6000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.awards-slider .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.awards-slider .swiper-button-next',
+                    prevEl: '.awards-slider .swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    }
+                },
+                speed: 800,
+            });
+        }
 
         function loadFeaturedHeroSlider() {
             const slider = document.getElementById('featuredHeroSlider');
@@ -1259,6 +1506,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadFeaturedHeroSlider();
             loadGallery();
+            loadAwardsSlider();
 
             document.querySelectorAll('.timeline-item, .artwork-card').forEach(el => {
                 observer.observe(el);
