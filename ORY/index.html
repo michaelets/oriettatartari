@@ -1220,8 +1220,7 @@
     <section id="gallery">
         <h2 class="section-title">Galleria Completa</h2>
         <div class="gallery-filters">
-            <button class="filter-btn active" onclick="filterGallery('all')">Tutte</button>
-            <button class="filter-btn" onclick="filterGallery('figurativo')">Figurativo</button>
+            <button class="filter-btn active" onclick="filterGallery('figurativo')">Figurativo</button>
             <button class="filter-btn" onclick="filterGallery('paesaggistico')">Paesaggistico</button>
             <button class="filter-btn" onclick="filterGallery('astratto')">Astratto</button>
         </div>
@@ -1362,7 +1361,7 @@
             {
                 title: "Recensione Sonia Terzino",
                 year: "2022",
-                description: "'In pochi artisti come in Orietta Tartari la pittura diventa poesia, un linguaggio romantico che cerca di andare alla radice delle cose e dell'essere. Sulle tele aleggia il profumo di una dolce e lontana melodia...'",
+                description: "'In pochi artisti come in Orietta Tartari la pittura diventa poesia, un linguaggio romantico che cerca di andare alla radice delle cose e dell'essere. Sulle tele aleggia il profumo di una dolce e lontana melodia poetica, tra le macchie di colore, tra le sfumature delle mille pennellate che l'artista imprime ogni volta alla tela si evince lo strazio e l'angoscia di un animo romantico. Una pittura che se fosse lirica potemmo definire affine allo 'Sturm und Drang' tedesco, alla poetica di Goethe che aveva fatto dei tormenti dell'anima la fonte di ispirazione per tutti i suoi romanzi. Questa è l'arte della Tartari, un mondo di emozioni e sensazioni che la pittrice riesce a fermare sulle tele. Dote innata sicuramente quella che possiede la giovane artista ternana, che cerca ancora il suo filone espressivo, ma che già da questi primi lavori ha dimostrato di conoscere bene la pittura e la materia. La ricchezza primaria di Orietta è il suo mondo interiore, sono quelle emozioni che l'artista riesce a provare davanti all'incanto del mondo che diventano materia di studio e di lavoro nei suoi quadri. E' da questa sublime poetica, da questa ricchezza che prendono vita le tele più belle di Orietta. Nascono cosi lavori che rappresentano una splendida veduta di Carsule, antica città romana, colta nella sua indelebile magnificenza, oppure i quadri che rappresentano longilinee figure di giovani donne o quelle in cui in primo piano viene messa la dolcezza della maternità. Un animo quello di Orietta capace di cogliere l'essenza delle cose, l'humus della vita e magistralmente di fermarlo nei suoi quadrı. Il tempo nelle opere della Tartari si cristallizza, e questi attimt fuggenti vengono fermati per sempre, resi immortali con sapienza da una giovane mano esperta. Ma la pittrice è capace ogni volta di mettersi in gioco, ama sperimentare generi e tecniche diverse in lei tutto è in evoluzione, tutto è un fermento di emozioni e di idee. Sicuramente animata dal sacro fuoco dell'arte Orietta troverà la sua strada, perché già chi si pone delle domande prima o poi avrà delle risposte, che forse sono gia nascoste dentro il proprio animo. Orietta ha capito che non ci può essere successo senza sacrificio, che non ci può essere arte vera senza conoscenza, studio, e sono tante e lunghe le ore che la pittrice passa diligentemente davanti alle sue La Tartari sente dentro di se che può dare ancora molto e di più e sicuramente lo farà perché è una donna intelligente e sopratutto è una pittrice che sente fortemente la passione per l'arte e per la pittura. Sono strani i cammini della vita, a volte tortuosi ma sicuramente il duro lavoro ed un'assidua costanza possono essere l'arma vincente per il successo.'",
                 author: "Sonia Terzino - Critica d'Arte",
             },
             {
@@ -1497,13 +1496,9 @@
             });
         }
 
-        function loadGallery(filter = 'all') {
+        function loadGallery(filter = 'figurativo') {
             const gallery = document.getElementById('galleryGrid');
-            let filtered = artworks;
-
-            if (filter !== 'all') {
-                filtered = artworks.filter(art => art.genre === filter);
-            }
+            let filtered = artworks.filter(art => art.genre === filter);
 
             gallery.innerHTML = filtered.map(art => `
                 <div class="artwork-card fade-in" onclick="openLightbox(${art.id})">
@@ -1586,7 +1581,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadFeaturedHeroSlider();
-            loadGallery();
+            loadGallery('figurativo');
             loadAwardsSlider();
 
             document.querySelectorAll('.timeline-item, .artwork-card').forEach(el => {
